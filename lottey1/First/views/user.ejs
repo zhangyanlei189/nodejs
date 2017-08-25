@@ -1,0 +1,101 @@
+<% include header.ejs %>
+<link rel="stylesheet" href="/stylesheets/user.css"/>
+<div id="page_content" class="clearfix">
+    <div class="list fl">
+        <table class="list_tb">
+            <thead>
+            <tr>
+                <td>员工编号</td>
+                <td>员工姓名</td>
+                <td style="width: 150px;">操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span>10001</span><input type="text" value="10001"/></td>
+                <td><span>张三</span><input type="text" value="张三"/></td>
+                <td><a href="#" class="save">保存</a><a href="#" class="edit">修改</a><a href="#" class="del">删除</a></td>
+            </tr>
+            <tr>
+                <td><span>10001</span><input type="text" value="10002"/></td>
+                <td><span>张三</span><input type="text" value="张三"/></td>
+                <td><a href="#" class="save">保存</a><a href="#" class="edit">修改</a><a href="#" class="del">删除</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="block fr">
+        <form action="">
+            <fieldset>
+                <legend>新增员工</legend>
+                <table>
+                    <tr>
+                        <td>员工编号</td>
+                        <td><input type="text" name="uNo"/></td>
+                    </tr>
+                    <tr>
+                        <td>员工姓名</td>
+                        <td><input type="text" name="uName"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="提&nbsp;&nbsp;交" id="submit" class="submit"/></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script>
+    $(function(){
+        //modify
+        function editFn(){
+            var edit = $("#page_content .list_tb .edit");
+            var save = $("#page_content .list_tb .save");
+            edit.on("click",function(){
+                $(this).hide().closest("tr").find(".save,input").show().end().find("span").hide();
+            });
+            save.on("click",function(){
+                $(this).hide().closest("tr").find(".edit,span").show().end().find("input").hide();
+                $.post("XXX",{},function(r){
+                    if(true){
+                        alert("添加成功");
+//                        $(this).hide().closest("tr").find(".edit,span").show().end().find("input").hide();
+                    }else{
+                        alert("修改失败");
+                    }
+                });
+            });
+        }
+
+        function addFn(){
+            var subBtn = $("#submit");
+            subBtn.on("click",function(){
+                var form = $("#page_content .block form");
+                $.post("###",form.serialize(),function(r){
+                    if(true){
+                        alert("添加成功");
+                    }else{
+                        alert("添加失败");
+                    }
+                });
+            });
+        }
+        function delFn(){
+            var del = $("#page_content .list_tb .del");
+            del.on("click",function(){
+                var res = confirm("确定删除？");
+                if(res){
+                    $.get("###",function(){
+
+                    });
+                }else{
+                }
+            });
+        }
+        editFn();
+        addFn();
+        delFn();
+    });
+</script>
+</body>
+</html>

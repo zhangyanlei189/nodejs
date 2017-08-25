@@ -1,0 +1,15 @@
+#page_content {padding-top: 20px;}
+#page_content .list{padding:5px;width: 49%;max-height:500px;box-sizing: border-box;overflow-y: auto;}
+#page_content .list::-webkit-scrollbar {width: 1px;background: #ccc;}
+#page_content .list::-webkit-scrollbar-thumb   {width: 1px;background: #999;}
+#page_content table{width: 100%;}
+#page_content table th{padding:5px 2px;color: #555;text-align: left;font-weight: normal;}
+#page_content table td{padding:8px 2px;border-bottom: 1px solid #f2f2f2;color: #555;font-size: 14px;}
+#page_content .block{padding: 5px;width: 49%;box-sizing: border-box;}
+#page_content .block .start{padding: 10px 3px;background:#555;display: inline-block;}
+#page_content .block .btn{display: inline-block;padding: 10px;background:#555;border-radius:3px;color: #fff;}
+#page_content .block .start{background: #2ec126;}
+#page_content .block .end{margin-left: 20px;background: #ff6f4d;}
+#page_content .p_list{display:block;margin-top:20px;min-height: 300px;border: 1px solid #cccaca;}
+#page_content .p_list span{float:left;width: 60px;height: 40px;border: 1px solid #999;margin: 5px;background: #ffcebb;}
+#page_content .p_list span.light{background: #ff6f4d;border: 1px solid #ff6f4d}
