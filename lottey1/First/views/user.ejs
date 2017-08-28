@@ -11,12 +11,14 @@
             </tr>
             </thead>
             <tbody>
+            <% if(data.length>0){%>
             <% for(var i=0;i<data.length;i++){%>
             <tr>
                 <td><span><%=data[i]["no"]%></span><input type="text" value="<%=data[i]["no"]%>" name="no"/></td>
                 <td><span><%=data[i]["name"]%></span><input type="text" value="<%=data[i]["name"]%>" name="name"/></td>
-                <td><a href="/user/uEdit/<%=data[i]["id"]%>" class="save">保存</a><a href="javascript:void(0);" class="edit">修改</a><a href="/user/del/<%=data[i]["id"]%>" class="del">删除</a></td>
+                <td><a href="/user/uEdit/<%=data[i]["id"]%>" class="save">保存</a><a href="javascript:void(0);" class="edit">修改</a><a href="/user/uDel/<%=data[i]["id"]%>" class="del">删除</a></td>
             </tr>
+            <%}%>
             <%}%>
             </tbody>
         </table>
@@ -90,16 +92,23 @@
             });
         }
         function delFn(){
-            var del = $("#page_content .list_tb .del");
-            del.on("click",function(){
+            var del = $("#page_content .list_tb");
+            del.delegate(".del","click",function(){
+                var that = this;
                 var res = confirm("确定删除？");
                 if(res){
-                    $.get("###",function(){
-
-                    });
+                    $.get($(this).attr("href"),function(r){
+                        if(r.flag){
+                            $(that).closest("tr").remove();
+                        }else{
+                            alert("删除失败");
+                        }
+                    },"json");
                 }else{
                 }
+                return false;
             });
+
         }
         editFn();
         addFn();
