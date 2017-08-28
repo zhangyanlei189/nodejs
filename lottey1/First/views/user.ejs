@@ -11,16 +11,13 @@
             </tr>
             </thead>
             <tbody>
+            <% for(var i=0;i<data.length;i++){%>
             <tr>
-                <td><span>10001</span><input type="text" value="10001"/></td>
-                <td><span>张三</span><input type="text" value="张三"/></td>
-                <td><a href="#" class="save">保存</a><a href="#" class="edit">修改</a><a href="#" class="del">删除</a></td>
+                <td><span><%=data[i]["no"]%></span><input type="text" value="<%=data[i]["no"]%>" name="no"/></td>
+                <td><span><%=data[i]["name"]%></span><input type="text" value="<%=data[i]["name"]%>" name="name"/></td>
+                <td><a href="/user/uEdit/<%=data[i]["id"]%>" class="save">保存</a><a href="javascript:void(0);" class="edit">修改</a><a href="/user/del/<%=data[i]["id"]%>" class="del">删除</a></td>
             </tr>
-            <tr>
-                <td><span>10001</span><input type="text" value="10002"/></td>
-                <td><span>张三</span><input type="text" value="张三"/></td>
-                <td><a href="#" class="save">保存</a><a href="#" class="edit">修改</a><a href="#" class="del">删除</a></td>
-            </tr>
+            <%}%>
             </tbody>
         </table>
     </div>
@@ -49,21 +46,26 @@
     $(function(){
         //modify
         function editFn(){
-            var edit = $("#page_content .list_tb .edit");
-            var save = $("#page_content .list_tb .save");
-            edit.on("click",function(){
+            var pNode = $("#page_content .list_tb");
+            pNode.delegate(".edit","click",function(){
                 $(this).hide().closest("tr").find(".save,input").show().end().find("span").hide();
             });
-            save.on("click",function(){
-                $(this).hide().closest("tr").find(".edit,span").show().end().find("input").hide();
-                $.post("XXX",{},function(r){
-                    if(true){
-                        alert("添加成功");
-//                        $(this).hide().closest("tr").find(".edit,span").show().end().find("input").hide();
+            pNode.delegate(".save","click",function(){
+                var name = $(this).closest("tr").find("input[name='name']").val();
+                var no = $(this).closest("tr").find("input[name='no']").val();
+                var that = this;
+                $.post($(this).attr("href"),{name:name,no:no},function(r){
+                    if(r.flag){
+                        alert("修改成功");
+                        var selfTr = $(that).closest("tr");
+                        selfTr.find("span").eq(0).text(selfTr.find("input[name='no']").val());
+                        selfTr.find("span").eq(1).text(selfTr.find("input[name='name']").val());
+                        $(that).hide().closest("tr").find(".edit,span").show().end().find("input").hide();
                     }else{
                         alert("修改失败");
                     }
-                });
+                },"json");
+                return false;
             });
         }
 
@@ -71,13 +73,20 @@
             var subBtn = $("#submit");
             subBtn.on("click",function(){
                 var form = $("#page_content .block form");
-                $.post("###",form.serialize(),function(r){
-                    if(true){
+                $.post("/user/uAdd",form.serialize(),function(r){
+                    if(r.flag){
                         alert("添加成功");
+                        var no = form.find("input[name='uNo']").val();
+                        var name = form.find("input[name='uName']").val();
+                        var str = "<tr><td><span>"+no+"</span><input type='text' value='"+no+"' name='uNo'/></td><td><span>"+name+"</span><input type='text' value='"+name+"'/></td><td><a href='#' class='save'>保存</a><a href='#' class='edit'>修改</a><a href='#' class='del'>删除</a></td></tr>";
+                        form.find("input[name='uNo']").val("");
+                        form.find("input[name='uName']").val("");
+                        $("#page_content .list_tb").prepend(str);
                     }else{
                         alert("添加失败");
                     }
                 });
+                return false;
             });
         }
         function delFn(){
