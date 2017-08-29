@@ -13,128 +13,21 @@
       </tr>
       </thead>
       <tbody>
+      <% if(data.length>0){%>
+      <% for(var i = 0;i<data.length;i++){%>
       <tr>
-        <td>1001</td>
-        <td>张三</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
+        <td><%=data[i].no%></td>
+        <td><%=data[i].name%></td>
+        <td><%=data[i].rate%></td>
+        <td><%=data[i].t%></td>
+        <td><%=data[i].money?data[i].money:0%></td>
       </tr>
-      <tr>
-        <td>1002</td>
-        <td>李四</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1003</td>
-        <td>王二</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1004</td>
-        <td>麻子</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1005</td>
-        <td>李鬼</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1006</td>
-        <td>李逵</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1001</td>
-        <td>李三</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1006</td>
-        <td>李逵</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1001</td>
-        <td>李三</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1006</td>
-        <td>李逵</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1001</td>
-        <td>李三</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1006</td>
-        <td>李逵</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1001</td>
-        <td>李三</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1006</td>
-        <td>李逵</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1001</td>
-        <td>李三</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1006</td>
-        <td>李逵</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <td>1001</td>
-        <td>李三</td>
-        <td>1</td>
-        <td>3</td>
-        <td>400</td>
-      </tr>
+      <%}%>
+      <%}%>
       </tbody>
     </table>
   </div>
+</div>
   <div class="block fr">
     <div><span id="start" class="start btn">开始</span><span id="end" class="end btn">停止</span></div>
 
@@ -146,7 +39,6 @@
   </div>
   <script>
     $(function(){
-
       function lotto(){
         var timmer = null;
         function anim(){
