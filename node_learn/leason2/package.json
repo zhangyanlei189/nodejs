@@ -1,0 +1,22 @@
+{
+  "name": "name1",
+  "version": "1.0.0",
+  "description": "第一个npm init",
+  "main": "jk",
+  "scripts": {
+    "test": "ddd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "dd"
+  },
+  "keywords": [
+    "ddd"
+  ],
+  "author": "zyl",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "utility": "^1.12.0"
+  }
+}

@@ -8,8 +8,8 @@
 #page_content .block{padding: 5px;width: 49%;box-sizing: border-box;}
 #page_content .block .start{padding: 10px 3px;background:#555;display: inline-block;}
 #page_content .block .btn{display: inline-block;padding: 10px;background:#555;border-radius:3px;color: #fff;}
-#page_content .block .start{background: #2ec126;}
+#page_content .block .start{background: #ff6f4d;}
 #page_content .block .end{margin-left: 20px;background: #ff6f4d;}
 #page_content .p_list{display:block;margin-top:20px;min-height: 300px;border: 1px solid #cccaca;}
-#page_content .p_list span{float:left;width: 60px;height: 40px;border: 1px solid #999;margin: 5px;background: #ffcebb;}
+#page_content .p_list span{float:left;min-width: 60px;height: 40px;border: 1px solid #999;margin: 5px;background: #ffcebb;text-align: center;line-height: 40px;color: #615959;}
 #page_content .p_list span.light{background: #ff6f4d;border: 1px solid #ff6f4d}

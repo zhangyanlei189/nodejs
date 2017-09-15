@@ -19,8 +19,32 @@ IndexModel.prototype = {
             }
         });
     },
-    luck:function(fn){
-
+    lottey:function(fn){
+        var sql = "select no,name,rate from user";
+        conn.query(sql,function(err,result){
+            var arr = [];
+            for(var i = 0;i<result.length;i++){
+                for(var j = 0,len = result[i]["rate"];j<len;j++){
+                    arr.push({no:result[i]["no"],rate:len});
+                }
+            };
+            var num = Math.floor(Math.random()*arr.length);
+            var data = arr[num];
+            this.setRate(data);
+            //fn({flag:true,data:data});
+        });
+    },
+    setRate:function(data){
+        var sql = "update user set rate = ? where no = ?";
+        conn.query(sql,[data["rate"]+1,data["no"]],function(err,result) {
+            console.log(result);
+            console.log("MMMJJJ");
+            if(result.affectedRows>0) {
+                fn({flag: true,mess:"success"});
+            }else{
+                fn({flag: false,mess:"error"});
+            }
+        });
     }
 }
 

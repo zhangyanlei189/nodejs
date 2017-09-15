@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/stylesheets/index.css"/>
 <div id="page_content" class="clearfix">
   <div class="list fl">
-    <table>
+    <table len="<%=data.length%>" class="list_tb">
       <thead>
       <tr>
         <th>员工编号</th>
@@ -31,32 +31,74 @@
     <div><span id="start" class="start btn">开始</span><span id="end" class="end btn">停止</span></div>
 
     <div class="p_list clearfix">
-      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <% if(data.length>0){%>
+      <% for(var i = 0;i<data.length;i++){%>
+        <span class="no_<%=data[i].no%>"><%=data[i].name%></span>
+      <%}%>
+      <%}%>
     </div>
   </div>
   </div>
   <script>
     $(function(){
-
       function lotto(){
-        var timmer = null;
-        function anim(){
+        var len = $("#page_content .list .list_tb").attr("len");
+        var timmer = null;var inter = 30;
+        var r,m=2;
+        function ret_anim(){
           var span = $("#page_content .p_list span");
           timmer = setInterval(function(){
-            var n = Math.floor(Math.random()*48);
+            inter += m*m;
+            m++;
+            //减少重复
+            var n = Math.floor(Math.random()*len);
+            if(r==n){
+              r = n = Math.floor(Math.random()*len);
+            }else{
+              r = n;
+            }
             span.removeClass("light").eq(n).addClass("light");
-          },50);
+            console.log(inter);
+            if(inter > 1000){
+              clearInterval(timmer);
+              inter = 30;m = 2;
+              $("#page_content .p_list span").removeClass("light").eq(3).addClass("light");
+
+              return false;
+            }
+            clearInterval(timmer);
+            anim();
+          },inter);
         }
 
+        var timmer1=null;
+        function init_anim(){
+          clearInterval(timmer1);
+          var span = $("#page_content .p_list span");
+          timmer1 = setInterval(function(){
+            var n = Math.floor(Math.random()*len);
+            span.removeClass("light").eq(n).addClass("light");
+//              $("#page_content .p_list span").removeClass("light").eq(3).addClass("light");
+              return false;
+          },30);
+        }
         function do_(){
           $("#end").on("click",function(){
             clearInterval(timmer);
-            $("#page_content .p_list span").removeClass("light").eq(5).addClass("light");
+            $("#page_content .p_list span").removeClass("light").eq(3).addClass("light");
           });
           $("#start").on("click",function(){
-            clearInterval(timmer);
-            anim();
+            init_anim();
+            setTimeout(function(){
+              $.get("/index/lottey",function(r){
+                console.log(r);
+                if(r.flag){
+                  clearInterval(timmer1);
+                  clearInterval(timmer);
+                  anim();
+                }
+              },"json");
+            },3000);
           });
         }
         do_();

@@ -1,0 +1,20 @@
+{
+  "name": "test",
+  "version": "0.1.1",
+  "description": "有逼格的爬虫",
+  "main": "ddd",
+  "scripts": {
+    "test": "dddd"
+  },
+  "keywords": [
+    "ddd"
+  ],
+  "author": "zyl",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "eventproxy": "^1.0.0",
+    "superagent": "^3.6.0",
+    "express": "^4.15.4"
+  }
+}
