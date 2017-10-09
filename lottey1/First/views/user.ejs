@@ -75,6 +75,7 @@
             var subBtn = $("#submit");
             subBtn.on("click",function(){
                 var form = $("#page_content .block form");
+                var  d = [{"name":"zyl","age":11},{"name":"zzz","age":89}];
                 $.post("/user/uAdd",form.serialize(),function(r){
                     if(r.flag){
                         alert("添加成功");
